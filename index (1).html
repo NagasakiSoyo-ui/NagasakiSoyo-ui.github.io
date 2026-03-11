@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海热申健康服务有限公司 | 细胞治疗与再生医学创新平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ========== CSS VARIABLES ========== */
+:root {
+  --primary: #1e90ff;
+  --primary-deep: #0b3d91;
+  --primary-light: #00c6ff;
+  --accent-cyan: #00e5ff;
+  --accent-teal: #00bfa5;
+  --bg-dark: #040a18;
+  --bg-card: rgba(10, 25, 60, 0.55);
+  --bg-glass: rgba(255,255,255,0.04);
+  --text-primary: #e8f0fe;
+  --text-secondary: rgba(200, 220, 255, 0.7);
+  --text-muted: rgba(160, 190, 240, 0.5);
+  --border-glass: rgba(100, 180, 255, 0.12);
+  --glow-blue: 0 0 40px rgba(30, 144, 255, 0.15);
+  --font-display: 'Outfit', 'Noto Sans SC', sans-serif;
+  --font-body: 'Noto Sans SC', 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+/* ========== UTILITY ========== */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+section { position: relative; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 640px;
+  line-height: 1.85;
+}
+
+/* ========== NAVIGATION ========== */
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s ease;
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: rgba(4, 10, 24, 0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-glass);
+  padding: 0.65rem 2rem;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 0.75rem;
+  text-decoration: none; color: #fff;
+}
+
+.nav-logo-icon {
+  width: 36px; height: 36px;
+}
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1.05rem;
+  letter-spacing: 0.5px;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 400;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--primary-light);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-menu-btn {
+  display: none;
+  background: none; border: none;
+  color: #fff; cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+#particles-canvas {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-gradient {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(11, 61, 145, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 20% 80%, rgba(0, 198, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 80% 60%, rgba(30, 144, 255, 0.1) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.hero-dna-helix {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 600px;
+  opacity: 0.08;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 2rem;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 100px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+  font-size: 0.78rem;
+  color: var(--primary-light);
+  margin-bottom: 2rem;
+  letter-spacing: 1.5px;
+  font-family: var(--font-mono);
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0, 229, 255, 0); }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.hero-title .gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #a8d8ff 40%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-company-en {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--text-secondary);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  font-family: var(--font-body);
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  box-shadow: 0 4px 25px rgba(30, 144, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 35px rgba(30, 144, 255, 0.45);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(5px);
+}
+
+.btn-outline:hover {
+  background: var(--bg-glass);
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.hero-scroll-hint {
+  position: absolute; bottom: 2.5rem;
+  left: 50%; transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--primary-light), transparent);
+  animation: scroll-line-anim 2s infinite;
+}
+
+@keyframes scroll-line-anim {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  50% { opacity: 1; transform: scaleY(1); }
+  100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+}
+
+.scroll-text {
+  font-size: 0.65rem; letter-spacing: 2px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ========== ABOUT SECTION ========== */
+.about {
+  padding: 8rem 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 50%, rgba(11, 61, 145, 0.08) 0%, transparent 60%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.about-text p {
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+
+.about-text p strong {
+  color: var(--primary-light);
+  font-weight: 500;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.about-stat-item {
+  padding: 1.25rem;
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(8px);
+}
+
+.about-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.about-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.about-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-cell-graphic {
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.cell-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  animation: cell-rotate 20s linear infinite;
+}
+
+.cell-ring:nth-child(1) {
+  inset: 0;
+  border-color: rgba(30, 144, 255, 0.15);
+}
+
+.cell-ring:nth-child(2) {
+  inset: 12%;
+  border-color: rgba(0, 198, 255, 0.12);
+  animation-duration: 15s;
+  animation-direction: reverse;
+}
+
+.cell-ring:nth-child(3) {
+  inset: 24%;
+  border-color: rgba(0, 229, 255, 0.1);
+  animation-duration: 25s;
+}
+
+.cell-ring:nth-child(4) {
+  inset: 36%;
+  background: radial-gradient(circle, rgba(30, 144, 255, 0.08) 0%, transparent 70%);
+  border: none;
+}
+
+.cell-ring-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  box-shadow: 0 0 12px var(--primary-light);
+}
+
+.cell-ring:nth-child(1) .cell-ring-dot { top: 0; left: 50%; transform: translate(-50%, -50%); }
+.cell-ring:nth-child(2) .cell-ring-dot { bottom: 10%; right: 0; transform: translate(50%, 0); }
+.cell-ring:nth-child(3) .cell-ring-dot { top: 50%; left: 0; transform: translate(-50%, -50%); }
+
+@keyframes cell-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.cell-center-text {
+  position: absolute;
+  inset: 36%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cell-center-text .big-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cell-center-text .label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  font-family: var(--font-mono);
+}
+
+/* ========== PIPELINE SECTION ========== */
+.pipeline {
+  padding: 8rem 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 100% 20%, rgba(0, 198, 255, 0.06) 0%, transparent 60%);
+}
+
+.pipeline-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.pipeline-header .section-desc {
+  margin: 0 auto;
+}
+
+.pipeline-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.pipeline-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.pipeline-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.3), transparent 50%, rgba(0, 198, 255, 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.pipeline-card:hover::before { opacity: 1; }
+
+.pipeline-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--glow-blue);
+  border-color: rgba(30, 144, 255, 0.25);
+}
+
+.pipeline-card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.15), rgba(0, 198, 255, 0.08));
+  border: 1px solid rgba(30, 144, 255, 0.2);
+}
+
+.pipeline-card-icon svg {
+  width: 24px; height: 24px;
+  stroke: var(--primary-light);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.pipeline-card-tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.tag-immune { background: rgba(30, 144, 255, 0.12); color: var(--primary-light); }
+.tag-regen { background: rgba(0, 191, 165, 0.12); color: var(--accent-teal); }
+.tag-ipsc { background: rgba(168, 85, 247, 0.12); color: #c084fc; }
+
+.pipeline-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.pipeline-card h4 {
+  font-size: 0.82rem;
+  color: var(--primary-light);
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+.pipeline-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.pipeline-card-apps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pipeline-card-apps span {
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+}
+
+/* ========== CLINICAL DATA SECTION ========== */
+.clinical {
+  padding: 8rem 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(11, 61, 145, 0.06) 0%, transparent 60%);
+}
+
+.clinical-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.clinical-header .section-desc { margin: 0 auto; }
+
+.clinical-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.clinical-stat-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s;
+}
+
+.clinical-stat-card:hover {
+  border-color: rgba(30, 144, 255, 0.3);
+  box-shadow: var(--glow-blue);
+}
+
+.clinical-stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.clinical-stat-unit {
+  font-size: 1.2rem;
+  color: var(--primary-light);
+  font-weight: 300;
+}
+
+.clinical-stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+}
+
+.clinical-stat-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+}
+
+.clinical-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.chart-card {
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+}
+
+.chart-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.chart-card .chart-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 260px;
+}
+
+/* ========== ADVANTAGES SECTION ========== */
+.advantages {
+  padding: 8rem 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 100% 50%, rgba(0, 198, 255, 0.05) 0%, transparent 60%);
+}
+
+.advantages-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.advantages-header .section-desc { margin: 0 auto; }
+
+.adv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.adv-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s;
+}
+
+.adv-card:hover {
+  border-color: rgba(30, 144, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: var(--glow-blue);
+}
+
+.adv-card-icon {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.15), rgba(0, 198, 255, 0.08));
+  border: 1px solid rgba(30, 144, 255, 0.2);
+}
+
+.adv-card-icon svg {
+  width: 24px; height: 24px;
+  stroke: var(--primary-light);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.adv-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.adv-card p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.adv-card .adv-detail {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  padding-left: 0.75rem;
+  border-left: 2px solid rgba(30, 144, 255, 0.2);
+}
+
+/* ========== VISION SECTION ========== */
+.vision {
+  padding: 8rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.vision-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(11, 61, 145, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 30%, rgba(0, 198, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 70%, rgba(30, 144, 255, 0.06) 0%, transparent 50%);
+}
+
+.vision-content {
+  position: relative; z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vision-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.vision-item {
+  padding: 2.5rem 1.5rem;
+  border-radius: 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s;
+}
+
+.vision-item:hover {
+  border-color: rgba(0, 198, 255, 0.25);
+  background: rgba(255,255,255,0.06);
+}
+
+.vision-item-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, rgba(30, 144, 255, 0.3), rgba(0, 198, 255, 0.2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.75rem;
+}
+
+.vision-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+}
+
+.vision-item p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 3rem 0 2rem;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(4, 10, 24, 0.6);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-brand { max-width: 360px; }
+
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footer-brand-en {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.footer-links h4 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.footer-links ul { list-style: none; }
+
+.footer-links li {
+  margin-bottom: 0.4rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--primary-light); }
+
+.footer-bottom {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-glass);
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+/* ========== DIVIDERS ========== */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glass), transparent);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+  .clinical-stats-row { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { order: -1; }
+  .about-cell-graphic { max-width: 320px; }
+  .adv-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .navbar { padding: 0.75rem 1rem; }
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(4, 10, 24, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-glass);
+    gap: 1rem;
+    z-index: 999;
+  }
+  .container { padding: 0 1.25rem; }
+
+  /* Hero mobile fixes */
+  .hero { min-height: 100svh; }
+  .hero-content { padding: 0 0.75rem; }
+  .hero-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .hero-company-en { font-size: 0.6rem; letter-spacing: 1.5px; word-break: break-all; }
+  .hero-subtitle { font-size: 0.9rem; letter-spacing: 1px; }
+  .hero-badge { font-size: 0.65rem; padding: 0.3rem 0.8rem; }
+  .hero-dna-helix { display: none; }
+  .hero-scroll-hint { bottom: 1.5rem; }
+  .btn { padding: 0.75rem 1.5rem; font-size: 0.85rem; }
+
+  /* Section spacing */
+  section { overflow: hidden; }
+  .about, .pipeline, .clinical, .advantages, .vision { padding: 5rem 0; }
+  .section-title { font-size: clamp(1.5rem, 5vw, 2rem); }
+
+  /* Pipeline */
+  .pipeline-grid { grid-template-columns: 1fr; }
+  .pipeline-card { padding: 1.5rem; }
+  .pipeline-card p { font-size: 0.84rem; }
+
+  /* Clinical */
+  .clinical-stats-row { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .clinical-stat-card { padding: 1.25rem 1rem; }
+  .clinical-stat-number { font-size: 1.8rem; }
+  .clinical-charts { grid-template-columns: 1fr; gap: 1.5rem; }
+  .chart-card { padding: 1.25rem; }
+  .chart-wrapper { height: 220px; }
+
+  /* Advantages */
+  .adv-card { flex-direction: column; gap: 1rem; padding: 1.5rem; }
+  .adv-card p { font-size: 0.84rem; }
+  .adv-card .adv-detail { font-size: 0.78rem; }
+
+  /* Vision */
+  .vision-items { grid-template-columns: 1fr; gap: 1.25rem; }
+  .vision-item { padding: 1.75rem 1.25rem; }
+
+  /* Footer */
+  .footer-inner { flex-direction: column; }
+  .footer-bottom { font-size: 0.65rem; }
+
+  /* About */
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .about-cell-graphic { max-width: 220px; }
+  .about-text p { font-size: 0.88rem; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  .hero-title { font-size: clamp(1.4rem, 7vw, 1.8rem); }
+  .hero-buttons { flex-direction: column; align-items: stretch; }
+  .hero-buttons .btn { justify-content: center; }
+  .clinical-stats-row { grid-template-columns: 1fr 1fr; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .about-stat-item { padding: 1rem 0.75rem; }
+  .about-stat-num { font-size: 1.4rem; }
+  .pipeline-header .section-desc,
+  .clinical-header .section-desc,
+  .advantages-header .section-desc { font-size: 0.88rem; }
+  .chart-wrapper { height: 200px; }
+  .footer-brand p { font-size: 0.78rem; }
+}
+
+/* ========== SCROLL REVEAL ANIMATION ========== */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+[data-reveal="fade-up"] {
+  transform: translateY(40px);
+}
+
+[data-reveal="fade-right"] {
+  transform: translateX(-40px);
+}
+
+[data-reveal="fade-left"] {
+  transform: translateX(40px);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVIGATION ==================== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="16" stroke="url(#logoGrad)" stroke-width="1.5"/>
+      <circle cx="18" cy="18" r="8" stroke="url(#logoGrad)" stroke-width="1" opacity="0.5"/>
+      <circle cx="18" cy="18" r="3" fill="url(#logoGrad)"/>
+      <circle cx="18" cy="8" r="1.5" fill="#00c6ff" opacity="0.8"/>
+      <circle cx="26" cy="24" r="1.5" fill="#1e90ff" opacity="0.6"/>
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36">
+          <stop offset="0%" stop-color="#1e90ff"/>
+          <stop offset="100%" stop-color="#00c6ff"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="nav-logo-text">热申健康</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">公司介绍</a></li>
+    <li><a href="#pipeline">技术管线</a></li>
+    <li><a href="#clinical">临床数据</a></li>
+    <li><a href="#advantages">技术优势</a></li>
+    <li><a href="#vision">企业愿景</a></li>
+  </ul>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="菜单">☰</button>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero" id="hero">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-bg-gradient"></div>
+
+  <!-- DNA Helix decorative -->
+  <svg class="hero-dna-helix" viewBox="0 0 200 600" fill="none">
+    <g opacity="0.6">
+      <path d="M60 0 Q140 75 60 150 Q-20 225 60 300 Q140 375 60 450 Q-20 525 60 600" stroke="#1e90ff" stroke-width="1" fill="none"/>
+      <path d="M140 0 Q60 75 140 150 Q220 225 140 300 Q60 375 140 450 Q220 525 140 600" stroke="#00c6ff" stroke-width="1" fill="none"/>
+      <line x1="60" y1="75" x2="140" y2="75" stroke="#1e90ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="150" x2="140" y2="150" stroke="#00c6ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="225" x2="140" y2="225" stroke="#1e90ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="300" x2="140" y2="300" stroke="#00c6ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="375" x2="140" y2="375" stroke="#1e90ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="450" x2="140" y2="450" stroke="#00c6ff" stroke-width="0.5" opacity="0.4"/>
+      <line x1="60" y1="525" x2="140" y2="525" stroke="#1e90ff" stroke-width="0.5" opacity="0.4"/>
+    </g>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      CELL THERAPY · REGENERATIVE MEDICINE
+    </div>
+    <h1 class="hero-title">
+      <span class="gradient-text">上海热申健康服务有限公司</span>
+    </h1>
+    <p class="hero-company-en">Shanghai Reshen Health Service Co., Ltd.</p>
+    <p class="hero-subtitle">细胞治疗 · 再生医学 · 免疫健康管理</p>
+    <div class="hero-buttons">
+      <a href="#about" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        了解公司
+      </a>
+      <a href="#pipeline" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        技术管线
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">SCROLL</span>
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<div class="section-divider"></div>
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text" data-reveal="fade-right">
+        <div class="section-label">// About Us</div>
+        <h2 class="section-title">引领细胞治疗<br>与再生医学创新</h2>
+        <p>上海热申健康服务有限公司是一家专注于<strong>细胞治疗与再生医学</strong>领域的创新型企业，致力于构建覆盖免疫细胞治疗、间充质干细胞治疗及iPSC衍生细胞产品的全链条技术平台。公司以"精准细胞治疗"为核心理念，围绕肿瘤免疫、自身免疫性疾病、退行性疾病及抗衰再生等方向，开展系统化的临床转化研究与健康管理服务。</p>
+        <p>公司建立了符合GMP标准的<strong>细胞制备与质量控制平台</strong>，具备从外周血单个核细胞（PBMC）分离、NK细胞扩增培养、间充质干细胞提取培养到细胞功能检测的全流程能力。同时引入<strong>流式细胞术免疫表型分析</strong>、细胞因子谱检测及细胞杀伤活性评估等先进技术手段，确保每一批次细胞产品的安全性、纯度与功能活性。</p>
+        <p>在前沿技术储备方面，公司积极布局<strong>iPSC（诱导多能干细胞）衍生细胞治疗技术</strong>，包括iPSC-NK细胞和iPSC-OSC（卵巢支持细胞）等方向，致力于打通"基因编辑—细胞分化—功能验证—临床应用"的完整通路，推动细胞治疗产品从个体化走向标准化、规模化。</p>
+
+        <div class="about-stats">
+          <div class="about-stat-item">
+            <div class="about-stat-num">6+</div>
+            <div class="about-stat-label">核心技术管线</div>
+          </div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">630+</div>
+            <div class="about-stat-label">临床应用案例</div>
+          </div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">GMP</div>
+            <div class="about-stat-label">标准制备平台</div>
+          </div>
+          <div class="about-stat-item">
+            <div class="about-stat-num">iPSC</div>
+            <div class="about-stat-label">前沿技术储备</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual" data-reveal="fade-left">
+        <div class="about-cell-graphic">
+          <div class="cell-ring"><div class="cell-ring-dot"></div></div>
+          <div class="cell-ring"><div class="cell-ring-dot"></div></div>
+          <div class="cell-ring"><div class="cell-ring-dot"></div></div>
+          <div class="cell-ring"></div>
+          <div class="cell-center-text">
+            <div class="big-num">∞</div>
+            <div class="label">CELL INNOVATION</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PIPELINE ==================== -->
+<div class="section-divider"></div>
+<section class="pipeline" id="pipeline">
+  <div class="container">
+    <div class="pipeline-header" data-reveal="fade-up">
+      <div class="section-label">// Technology Pipeline</div>
+      <h2 class="section-title">核心技术管线</h2>
+      <p class="section-desc">覆盖免疫细胞治疗、间充质干细胞治疗及iPSC衍生细胞产品的全链条技术平台，构建从细胞制备到临床转化的完整闭环</p>
+    </div>
+
+    <div class="pipeline-grid">
+      <!-- Card 1: 自体NK -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-immune">IMMUNE</span>
+        <h3>自体NK细胞治疗</h3>
+        <h4>Autologous NK Cell Therapy</h4>
+        <p>采集患者自体外周血，通过体外分离PBMC并经过14-21天特异性扩增培养，获得高纯度、高活性的NK细胞制剂。培养体系采用IL-2/IL-15/IL-21多因子联合刺激方案，无需饲养层细胞即可实现NK细胞的高效扩增与功能活化，显著提升NK细胞的增殖倍数与杀伤效能。回输前进行CD3⁻CD56⁺流式纯度检测与细胞杀伤功能评估（K562靶细胞杀伤实验），确保每一批次细胞产品达到严格的质量标准。</p>
+        <div class="pipeline-card-apps">
+          <span>肿瘤辅助免疫</span>
+          <span>术后免疫重建</span>
+          <span>感染性疾病</span>
+          <span>免疫调节</span>
+        </div>
+      </div>
+
+      <!-- Card 2: 脐带血NK -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-immune">IMMUNE</span>
+        <h3>脐带血NK细胞</h3>
+        <h4>Cord Blood NK Cell Therapy</h4>
+        <p>以健康足月新生儿脐带血为细胞来源，利用免疫磁珠分选（MACS）技术富集CD56⁺NK细胞前体，经过体外大规模扩增培养获得"年轻态"NK细胞制剂。脐带血来源NK细胞具有免疫原性低、增殖潜力强、可实现标准化批量生产等独特优势，尤其适用于自体NK细胞功能低下或采集困难的患者群体。产品经过严格的无菌检测、内毒素检测及支原体检测。</p>
+        <div class="pipeline-card-apps">
+          <span>异体免疫治疗</span>
+          <span>免疫力低下人群</span>
+          <span>标准化生产</span>
+          <span>肿瘤辅助</span>
+        </div>
+      </div>
+
+      <!-- Card 3: ADSC -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-regen">REGEN</span>
+        <h3>自体脂肪间充质干细胞</h3>
+        <h4>Adipose-Derived Stem Cells (ADSC)</h4>
+        <p>通过公司自主开发的原代细胞3D分离技术，仅需约0.5 cm³脂肪组织即可高效获得高质量ADSC，显著低于传统酶解法所需取材量，有效降低取样创伤与患者不适。该技术无需酶解处理，减少细胞损伤及培养中的潜在风险，更好地保持细胞天然活性与功能。ADSC具有强大的多向分化潜能（成骨、成脂、成软骨）与旁分泌功能，可分泌多种生长因子（VEGF、HGF、bFGF）及外泌体，发挥抗炎、促血管生成、组织修复等生物学效应。</p>
+        <div class="pipeline-card-apps">
+          <span>抗衰再生</span>
+          <span>关节修复</span>
+          <span>瘢痕修复</span>
+          <span>慢性炎症调节</span>
+        </div>
+      </div>
+
+      <!-- Card 4: MSC -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-regen">REGEN</span>
+        <h3>脐带间充质干细胞</h3>
+        <h4>Umbilical Cord MSC Therapy</h4>
+        <p>从健康足月分娩的脐带华通氏胶（Wharton's Jelly）中提取间充质干细胞，经过标准化的组织块贴壁法或酶消化法进行原代培养与传代扩增。脐带MSC具有增殖能力强、免疫原性极低、伦理争议小等突出优势，同时保留了强大的免疫调节与组织修复功能。可分泌TGF-β、IDO、PGE2等免疫抑制因子，对T细胞增殖和炎性因子释放具有显著抑制作用，在自身免疫性疾病、退行性疾病及慢性炎症管理中展现广泛应用前景。</p>
+        <div class="pipeline-card-apps">
+          <span>自身免疫疾病</span>
+          <span>退行性疾病</span>
+          <span>肝损伤修复</span>
+          <span>神经系统疾病</span>
+        </div>
+      </div>
+
+      <!-- Card 5: iPSC-NK -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-ipsc">iPSC</span>
+        <h3>iPSC-NK细胞技术</h3>
+        <h4>iPSC-Derived NK Cell Platform</h4>
+        <p>基于人诱导多能干细胞（hiPSC）定向分化为功能性NK细胞的前沿技术平台。通过造血祖细胞中间态（HPC），利用SCF、FLT3L、IL-3、IL-7、IL-15等细胞因子的阶段性组合诱导方案，实现从iPSC到成熟NK细胞的高效分化。iPSC-NK具有无限扩增潜力，可进行基因编辑（CAR构建、免疫检查点敲除）以增强抗肿瘤功能，是实现"通用型"现成（off-the-shelf）免疫细胞产品的关键技术路径。当前正在进行分化效率优化与功能表型验证。</p>
+        <div class="pipeline-card-apps">
+          <span>通用型免疫治疗</span>
+          <span>基因编辑CAR-NK</span>
+          <span>规模化生产</span>
+          <span>实体瘤治疗</span>
+        </div>
+      </div>
+
+      <!-- Card 6: iPSC-OSC -->
+      <div class="pipeline-card" data-reveal="fade-up">
+        <div class="pipeline-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <span class="pipeline-card-tag tag-ipsc">iPSC</span>
+        <h3>iPSC-OSC技术</h3>
+        <h4>iPSC-Derived Ovarian Support Cells</h4>
+        <p>基于iPSC定向分化技术开发卵巢支持细胞（OSC），用于女性生殖健康与卵巢功能修复。该技术路径参考最新Cell Stem Cell发表的Fertilo（hiPSC-derived ovarian support cells）研究成果，通过特定的分化方案诱导iPSC向颗粒细胞/卵泡膜细胞谱系分化，获得具有内分泌支持功能的卵巢体细胞。目标是为卵巢早衰（POI）、卵巢功能减退及辅助生殖领域提供创新性的细胞治疗方案。目前处于早期技术研发与可行性验证阶段。</p>
+        <div class="pipeline-card-apps">
+          <span>卵巢功能修复</span>
+          <span>生殖健康</span>
+          <span>内分泌调节</span>
+          <span>辅助生殖</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CLINICAL DATA ==================== -->
+<div class="section-divider"></div>
+<section class="clinical" id="clinical">
+  <div class="container">
+    <div class="clinical-header" data-reveal="fade-up">
+      <div class="section-label">// Clinical Data</div>
+      <h2 class="section-title">临床应用数据</h2>
+      <p class="section-desc">基于严格的质量控制与安全管理体系，我们的细胞治疗技术已在多个临床场景中积累了丰富的应用数据与经验</p>
+    </div>
+
+    <div class="clinical-stats-row">
+      <div class="clinical-stat-card" data-reveal="fade-up">
+        <div class="clinical-stat-number"><span class="counter" data-target="100">0</span><span class="clinical-stat-unit">+例</span></div>
+        <div class="clinical-stat-label">自体NK细胞回输</div>
+        <div class="clinical-stat-sub">Autologous NK Infusion</div>
+      </div>
+      <div class="clinical-stat-card" data-reveal="fade-up">
+        <div class="clinical-stat-number"><span class="counter" data-target="30">0</span><span class="clinical-stat-unit">+例</span></div>
+        <div class="clinical-stat-label">脐带血NK细胞回输</div>
+        <div class="clinical-stat-sub">Cord Blood NK Infusion</div>
+      </div>
+      <div class="clinical-stat-card" data-reveal="fade-up">
+        <div class="clinical-stat-number"><span class="counter" data-target="300">0</span><span class="clinical-stat-unit">+例</span></div>
+        <div class="clinical-stat-label">ADSC干细胞回输</div>
+        <div class="clinical-stat-sub">ADSC Infusion</div>
+      </div>
+      <div class="clinical-stat-card" data-reveal="fade-up">
+        <div class="clinical-stat-number"><span class="counter" data-target="200">0</span><span class="clinical-stat-unit">+例</span></div>
+        <div class="clinical-stat-label">脐带MSC回输</div>
+        <div class="clinical-stat-sub">UC-MSC Infusion</div>
+      </div>
+    </div>
+
+    <div class="clinical-charts">
+      <div class="chart-card" data-reveal="fade-up">
+        <h3>NK细胞回输前后免疫指标变化</h3>
+        <div class="chart-subtitle">IFN-γ / TNF-α / Granzyme B / Perforin 水平对比</div>
+        <div class="chart-wrapper">
+          <canvas id="chartCytokine"></canvas>
+        </div>
+      </div>
+      <div class="chart-card" data-reveal="fade-up">
+        <h3>MSC治疗前后炎症因子变化</h3>
+        <div class="chart-subtitle">IL-6 / CRP / TNF-α / IL-10 水平变化趋势</div>
+        <div class="chart-wrapper">
+          <canvas id="chartInflammation"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ADVANTAGES ==================== -->
+<div class="section-divider"></div>
+<section class="advantages" id="advantages">
+  <div class="container">
+    <div class="advantages-header" data-reveal="fade-up">
+      <div class="section-label">// Advantages</div>
+      <h2 class="section-title">技术优势</h2>
+      <p class="section-desc">从细胞制备、质量控制到功能评估，构建全链条的技术保障体系，确保每一批次细胞产品的安全性与有效性</p>
+    </div>
+
+    <div class="adv-grid">
+      <!-- 优势1 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M3 21h18"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+        </div>
+        <div>
+          <h3>GMP标准细胞制备平台</h3>
+          <p>建立符合GMP规范的洁净细胞制备实验室，配备万级层流净化系统、全封闭式细胞培养工作站及环境监控系统。从细胞采集、分离、培养到制剂灌装，全流程在严格的无菌环境下完成，确保产品无污染、可追溯。</p>
+          <div class="adv-detail">配备CO₂培养箱、生物安全柜、液氮储存系统等核心设备，支持NK细胞、MSC、ADSC等多种细胞类型的同步制备与质控。</div>
+        </div>
+      </div>
+
+      <!-- 优势2 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <h3>全流程质量控制体系</h3>
+          <p>建立涵盖原材料检验、中间品控制及终产品放行检测的三级质控体系。每一批次细胞产品均经过无菌检测、内毒素检测、支原体检测、细胞活率检测及免疫表型鉴定，全面保障产品的安全性与一致性。</p>
+          <div class="adv-detail">采用流式细胞术进行CD标记检测（CD3、CD16、CD56、CD73、CD90、CD105等），结合台盼蓝染色与CCK-8法评估细胞活力，确保各项指标达到临床应用标准。</div>
+        </div>
+      </div>
+
+      <!-- 优势3 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div>
+          <h3>免疫细胞功能评估体系</h3>
+          <p>构建系统化的免疫细胞功能评估平台，涵盖NK细胞杀伤活性检测（LDH释放法/流式检测法，以K562为靶细胞）、T细胞增殖与活化评估、以及细胞因子分泌谱分析（IFN-γ、TNF-α、Granzyme B、Perforin等）。</p>
+          <div class="adv-detail">同步建立免疫表型分析体系，通过多色流式细胞术监测细胞分化状态与功能亚群分布，为治疗方案优化提供精确数据支持。</div>
+        </div>
+      </div>
+
+      <!-- 优势4 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div>
+          <h3>细胞因子监测与个性化评估</h3>
+          <p>在细胞治疗前后进行系统的细胞因子谱监测，包括Th1/Th2细胞因子平衡分析（IFN-γ/IL-4比值）、炎症因子水平监测（IL-6、CRP、TNF-α）及抗炎因子变化（IL-10、TGF-β），量化评估治疗效果与免疫状态变化。</p>
+          <div class="adv-detail">结合外周血淋巴细胞亚群分析（CD4⁺/CD8⁺ T细胞比值、NK细胞活性比例等），为每位客户制定个性化的细胞治疗方案与随访计划。</div>
+        </div>
+      </div>
+
+      <!-- 优势5 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h3>再生医学临床转化能力</h3>
+          <p>深耕间充质干细胞外泌体研究领域，已建立完整的外泌体分离纯化（超速离心法/SEC法）、表征鉴定（NTA粒径分析、Western blot标志物检测）及功能评价体系。在ADSC外泌体调控增生性瘢痕形成的研究中取得关键进展。</p>
+          <div class="adv-detail">发现ADSC外泌体中let-7家族miRNA（let-7b-5p等）高度富集，可通过靶向CCL7等关键基因抑制纤维化进程，相关成果正在进行学术发表与临床转化验证。</div>
+        </div>
+      </div>
+
+      <!-- 优势6 -->
+      <div class="adv-card" data-reveal="fade-up">
+        <div class="adv-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <h3>iPSC前沿技术研发平台</h3>
+          <p>建立iPSC细胞系建库、定向分化与功能验证的完整技术体系。在iPSC-NK方向，已建立从iPSC经造血祖细胞（HPC）向成熟NK细胞分化的标准化方案，并持续优化分化效率与功能表型。</p>
+          <div class="adv-detail">同步推进iPSC-OSC（卵巢支持细胞）分化技术开发，并积极探索基因编辑（电穿孔/核转染技术）与iPSC平台的结合应用，为下一代通用型细胞治疗产品的开发奠定技术基础。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VISION ==================== -->
+<div class="section-divider"></div>
+<section class="vision" id="vision">
+  <div class="vision-bg"></div>
+  <div class="container">
+    <div class="vision-content" data-reveal="fade-up">
+      <div class="section-label">// Our Vision</div>
+      <h2 class="section-title">企业愿景</h2>
+      <p class="section-desc" style="margin: 0 auto 1rem;">以细胞科技赋能生命健康，推动再生医学从实验室走向临床</p>
+    </div>
+
+    <div class="vision-items">
+      <div class="vision-item" data-reveal="fade-up">
+        <div class="vision-item-num">01</div>
+        <h3>推动细胞治疗产业发展</h3>
+        <p>通过持续的技术创新与产业化探索，构建覆盖免疫细胞、干细胞与iPSC衍生细胞的全谱系细胞治疗产品体系，推动中国细胞治疗产业迈向新高度。</p>
+      </div>
+      <div class="vision-item" data-reveal="fade-up">
+        <div class="vision-item-num">02</div>
+        <h3>促进再生医学创新</h3>
+        <p>深化干细胞外泌体研究与iPSC技术开发，打通基础研究到临床转化的完整通路，在组织修复、抗衰再生与生殖健康等领域持续突破。</p>
+      </div>
+      <div class="vision-item" data-reveal="fade-up">
+        <div class="vision-item-num">03</div>
+        <h3>提供精准健康解决方案</h3>
+        <p>基于免疫功能评估与细胞因子监测数据，为每一位客户量身定制个性化的细胞治疗方案与长期健康管理计划，实现从"治疗"到"预防"的范式转变。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">上海热申健康服务有限公司</div>
+        <div class="footer-brand-en">SHANGHAI RESHEN HEALTH SERVICE CO., LTD.</div>
+        <p>专注细胞治疗与再生医学领域，构建覆盖免疫细胞、间充质干细胞及iPSC衍生细胞的全链条技术平台，致力于为客户提供安全、有效、个性化的细胞健康管理方案。</p>
+      </div>
+      <div class="footer-links">
+        <h4>技术领域</h4>
+        <ul>
+          <li><a href="#pipeline">免疫细胞治疗</a></li>
+          <li><a href="#pipeline">间充质干细胞治疗</a></li>
+          <li><a href="#pipeline">iPSC衍生细胞技术</a></li>
+          <li><a href="#pipeline">再生医学研究</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a href="#about">公司介绍</a></li>
+          <li><a href="#pipeline">技术管线</a></li>
+          <li><a href="#clinical">临床数据</a></li>
+          <li><a href="#advantages">技术优势</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 上海热申健康服务有限公司 All Rights Reserved. | Shanghai Reshen Health Service Co., Ltd.
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+/* ========== SCROLL REVEAL (replaces AOS) ========== */
+(function() {
+  var reveals = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el, i) {
+      el.style.transitionDelay = (i % 4) * 80 + 'ms';
+      observer.observe(el);
+    });
+  } else {
+    // Fallback: show everything immediately
+    reveals.forEach(function(el) { el.classList.add('revealed'); });
+  }
+})();
+
+/* ========== NAVBAR SCROLL ========== */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ========== MOBILE MENU ========== */
+document.getElementById('menuBtn').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+/* ========== PARTICLE CANVAS ========== */
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  const PARTICLE_COUNT = 80;
+  const MAX_DIST = 150;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5,
+        opacity: Math.random() * 0.4 + 0.1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // draw connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(30, 144, 255, ${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw particles
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(100, 200, 255, ${p.opacity})`;
+      ctx.fill();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); createParticles(); });
+  resize();
+  createParticles();
+  draw();
+})();
+
+/* ========== COUNTER ANIMATION ========== */
+function animateCounters() {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    if (counter.dataset.animated) return;
+    const rect = counter.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      counter.dataset.animated = 'true';
+      const target = parseInt(counter.dataset.target);
+      const duration = 2000;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+  });
+}
+window.addEventListener('scroll', animateCounters);
+animateCounters();
+
+/* ========== CHARTS ========== */
+try {
+const chartFont = { family: "'Outfit', 'Noto Sans SC', sans-serif" };
+const gridColor = 'rgba(100, 180, 255, 0.08)';
+const tickColor = 'rgba(200, 220, 255, 0.5)';
+
+Chart.defaults.color = tickColor;
+Chart.defaults.font.family = chartFont.family;
+
+// Cytokine chart
+const ctxCytokine = document.getElementById('chartCytokine').getContext('2d');
+new Chart(ctxCytokine, {
+  type: 'bar',
+  data: {
+    labels: ['IFN-γ', 'TNF-α', 'Granzyme B', 'Perforin'],
+    datasets: [
+      {
+        label: '回输前',
+        data: [85, 42, 120, 65],
+        backgroundColor: 'rgba(30, 144, 255, 0.25)',
+        borderColor: 'rgba(30, 144, 255, 0.6)',
+        borderWidth: 1,
+        borderRadius: 4
+      },
+      {
+        label: '回输后',
+        data: [210, 78, 285, 145],
+        backgroundColor: 'rgba(0, 198, 255, 0.35)',
+        borderColor: 'rgba(0, 198, 255, 0.7)',
+        borderWidth: 1,
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top', labels: { padding: 16, usePointStyle: true, pointStyle: 'rectRounded', font: { size: 11 } } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+      y: {
+        grid: { color: gridColor },
+        ticks: { font: { size: 10 } },
+        title: { display: true, text: 'pg/mL', font: { size: 10 }, color: tickColor }
+      }
+    }
+  }
+});
+
+// Inflammation chart
+const ctxInflam = document.getElementById('chartInflammation').getContext('2d');
+new Chart(ctxInflam, {
+  type: 'line',
+  data: {
+    labels: ['基线', '1周', '2周', '4周', '8周', '12周'],
+    datasets: [
+      {
+        label: 'IL-6 (pg/mL)',
+        data: [48, 38, 28, 18, 14, 12],
+        borderColor: '#ff6b6b',
+        backgroundColor: 'rgba(255, 107, 107, 0.08)',
+        tension: 0.4, fill: true, pointRadius: 3
+      },
+      {
+        label: 'CRP (mg/L)',
+        data: [12, 9.5, 7, 4.5, 3, 2.2],
+        borderColor: '#ffa726',
+        backgroundColor: 'rgba(255, 167, 38, 0.08)',
+        tension: 0.4, fill: true, pointRadius: 3
+      },
+      {
+        label: 'IL-10 (pg/mL)',
+        data: [8, 15, 28, 42, 48, 52],
+        borderColor: '#00e5ff',
+        backgroundColor: 'rgba(0, 229, 255, 0.08)',
+        tension: 0.4, fill: true, pointRadius: 3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'top', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } }
+    },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { font: { size: 10 } } },
+      y: {
+        grid: { color: gridColor },
+        ticks: { font: { size: 10 } }
+      }
+    }
+  }
+});
+} catch(e) { console.log('Chart.js not loaded, charts skipped'); }
+</script>
+</body>
+</html>
